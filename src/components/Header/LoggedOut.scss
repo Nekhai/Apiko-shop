@@ -1,0 +1,18 @@
+.logged-out {
+  display: flex;
+  align-items: center;
+  &__btn {
+    background: none;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: #ffffff;
+  }
+  &__line {
+    margin: 0 15px;
+    width: 2px;
+    height: 13px;
+    background: #fd7114;
+  }
+}

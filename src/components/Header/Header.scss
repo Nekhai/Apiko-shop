@@ -1,9 +1,12 @@
+@import "../../styles/variables.scss";
+
 .header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 160px;
   width: 100%;
   height: 76px;
   background: #110f21;
-  &__logo {
-  }
-  &__content {
-  }
 }
