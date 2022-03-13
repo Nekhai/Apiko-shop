@@ -1,0 +1,121 @@
+@import "../styles/variables.scss";
+
+.item {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.7);
+  &__wrap {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 1003px;
+    height: 697px;
+    top: calc(50% - 348px);
+    left: calc(50% - 502px);
+    padding: 141px 135px 126px 87px;
+    background: #ffffff;
+  }
+  &__close {
+    position: absolute;
+    top: 35px;
+    right: 35px;
+    background: none;
+  }
+  &__content {
+    display: flex;
+  }
+  &__img {
+    display: flex;
+    flex-shrink: 0;
+    width: 422px;
+    height: 322px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e4e4e4;
+    box-shadow: 0px 4px 14px rgba(121, 121, 121, 0.0527344);
+    border-radius: 4px;
+    & > img {
+      max-width: 100%;
+      max-height: 100%;
+      border: 7px solid #ffffff;
+      border-radius: 3px;
+    }
+  }
+  &__text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 322px;
+    padding: 0 0 0 38px;
+  }
+  &__title {
+    max-height: 52px;
+    overflow: hidden;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: 0.5px;
+    color: $text-dark;
+  }
+  &__description {
+    max-height: 100px;
+    overflow: overlay;
+    padding: 10px 14px 0 0;
+    font-size: 15px;
+    line-height: 22px;
+    color: $text-light;
+  }
+  &__btns {
+    display: flex;
+    justify-content: space-between;
+    margin: 71px 0 0 0;
+  }
+  &__btns-add {
+    display: flex;
+    justify-content: space-between;
+    width: 475px;
+  }
+}
+
+.price {
+  display: flex;
+  justify-content: space-between;
+  max-width: 240px;
+  padding: 5px 0 0 0;
+  margin: 0 0 25px 0;
+  color: $text-dark;
+  line-height: 26px;
+  &__title {
+    font-weight: 500;
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+  &__number {
+    font-weight: bold;
+    font-size: 18px;
+    letter-spacing: 0.5px;
+  }
+}
+
+.total {
+  max-width: 148px;
+  margin: 45px 0 0 0;
+  &__price {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__title {
+    font-size: 15px;
+    line-height: 22px;
+    color: $text-light;
+  }
+  &__number {
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 26px;
+    color: $text-dark;
+  }
+}
