@@ -1,0 +1,33 @@
+@import "./variables.scss";
+
+.buttons-orange-border {
+  border: 2px solid $orange-button;
+  background: none;
+  font-weight: 500;
+  color: $orange-button;
+}
+.buttons-orange,
+.buttons-orange-border {
+  width: 220px;
+  height: 36px;
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  transition: 0.3s;
+  &:hover {
+    transition: 0.3s;
+    opacity: 0.8;
+  }
+}
+
+.buttons-orange,
+.buttons-orange-border-active {
+  background: $orange-button;
+  color: #ffffff;
+}
+.buttons-orange-border-active svg {
+  margin: 0 0 0 14px;
+  vertical-align: middle;
+}
