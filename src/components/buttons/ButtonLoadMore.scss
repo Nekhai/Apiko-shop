@@ -1,0 +1,16 @@
+.button-load-more {
+  width: 150px;
+  height: 36px;
+  background: #148dfd;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0.4px;
+  color: #ffffff;
+  transition: 0.3s;
+  &:hover {
+    transition: 0.3s;
+    opacity: 0.8;
+  }
+}

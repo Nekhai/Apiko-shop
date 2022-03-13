@@ -1,0 +1,22 @@
+@import "../../styles/variables.scss";
+
+.count {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 81px;
+  // margin: 24px 0 0 0;
+  &__btn {
+    width: 26px;
+    height: 26px;
+    padding: 1px 0 0 0;
+    border-radius: 50%;
+    background: #e0e0e0;
+    font-size: 17px;
+    color: $text-light;
+  }
+  &__amount {
+    font-size: 15px;
+    line-height: 22px;
+  }
+}
