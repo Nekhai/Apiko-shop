@@ -1,0 +1,80 @@
+@import "../styles/variables.scss";
+
+.app-item {
+  position: relative;
+  width: 209px;
+  height: 212px;
+  padding: 4px;
+  border: 1px solid #e0e0e0;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 14px rgba(121, 121, 121, 0.0527344);
+  border-radius: 4px;
+  &__img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 201px;
+    height: 147px;
+    cursor: pointer;
+    & img {
+      display: block;
+      max-height: 100%;
+      max-width: 100%;
+    }
+  }
+  &__title {
+    height: 28px;
+    overflow: hidden;
+    padding: 9px 8px 2px 8px;
+    font-size: 15px;
+    line-height: 22px;
+    color: $text-dark;
+    transition: 0.4s;
+    cursor: pointer;
+    &:hover {
+      transition: 0.4s;
+      color: $text-light;
+    }
+  }
+  &__price {
+    padding: 0 8px;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: 0.5px;
+    color: $text-dark;
+  }
+  &__like {
+    position: absolute;
+    right: 8px;
+    bottom: 46px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.163407);
+    background: #ffffff;
+  }
+  &__btn {
+    display: block;
+    margin: 7px auto;
+    background: none;
+    & svg,
+    & path {
+      transition: 0.2s;
+      fill: none;
+      stroke: #707070;
+    }
+    &:hover svg,
+    &:hover path {
+      transition: 0.2s;
+      fill: #e0e0e0;
+      stroke: #e0e0e0;
+    }
+  }
+  &__btn-active svg,
+  &__btn-active path {
+    transition: 0.2s;
+    fill: $orange-button;
+    stroke: $orange-button;
+  }
+}
