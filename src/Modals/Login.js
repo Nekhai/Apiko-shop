@@ -79,9 +79,6 @@ export const Login = () => {
                 </p>
                 <PasswordEye />
               </div>
-              <Link to="/reset-password" className="form__reset">
-                Don’t remember password?
-              </Link>
               <button className="form__submit-btn" type="submit">
                 Login
               </button>

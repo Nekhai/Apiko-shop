@@ -36,7 +36,7 @@
     display: block;
     width: 362px;
     height: 36px;
-    margin: 35px auto 0;
+    margin: 80px auto 0;
     background: $orange-button;
     border-radius: 4px;
     transition: 0.4s;
@@ -68,17 +68,6 @@
     line-height: 26px;
     color: #fd7114;
   }
-  &__reset {
-    display: inline-block;
-    width: 100%;
-    padding: 0 30px 0 0;
-    text-align: right;
-    font-size: 14px;
-    line-height: 21px;
-    letter-spacing: 0.4px;
-    color: #8c8c8c;
-  }
-
   &__valid-err {
     border: 1px solid $text-red;
   }
