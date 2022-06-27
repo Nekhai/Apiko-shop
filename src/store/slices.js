@@ -1,8 +1,8 @@
-import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const modalSlice = createSlice({
   name: "modal",
-  initialState: { modal: false },
+  initialState: { modal: false, setting: false },
   reducers: {
     openModal(state, action) {
       state.modal = action.payload;
@@ -10,14 +10,34 @@ const modalSlice = createSlice({
     closeModal(state) {
       state.modal = false;
     },
+    openSetting(state, action) {
+      state.setting = action.payload;
+    },
+  },
+});
+
+const addedModalSlice = createSlice({
+  name: "addedModal",
+  initialState: {
+    addedName: null,
+  },
+  reducers: {
+    showAddedModal(state, action) {
+      state.addedName = action.payload;
+    },
+    hideAddedModal(state) {
+      state.addedName = null;
+    },
   },
 });
 
 const cartSlice = createSlice({
   name: "cart",
-  initialState: { cart: [], total: 0 },
+  initialState: { cart: [], total: 0, buyNow: [] },
   reducers: {
     addToCart(state, action) {
+      // !state.cart[action.payload.productId]
+
       const index = state.cart.findIndex(
         (item) => item.productId === action.payload.productId
       );
@@ -31,13 +51,27 @@ const cartSlice = createSlice({
       );
     },
     changeQuantity(state, action) {
-      const index = state.cart.findIndex(
-        (item) => item.productId === action.payload.productId
-      );
-      state.cart[index].quantity = action.payload.quantity;
+      if (state.buyNow.length) {
+        state.buyNow[0].quantity = action.payload.quantity;
+      } else {
+        const index = state.cart.findIndex(
+          (item) => item.productId === action.payload.productId
+        );
+        state.cart[index].quantity = action.payload.quantity;
+      }
     },
     countCart(state) {
       state.total = state.cart.reduce((acc, cur) => acc + cur.quantity, 0);
+    },
+    resetCart(state) {
+      state.cart = [];
+      state.total = 0;
+    },
+    setBuyNow(state, action) {
+      state.buyNow = action.payload;
+    },
+    countBuyNow(state, action) {
+      state.buyNow[0].quantity = action.payload;
     },
   },
 });
@@ -67,36 +101,25 @@ const passwordSlice = createSlice({
 
 const itemSlice = createSlice({
   name: "item",
-  initialState: { id: null },
+  initialState: { id: null, orderId: null, orderData: null },
   reducers: {
     setId(state, action) {
-      state.item = action.payload;
+      state.id = action.payload;
+    },
+    setOrderId(state, action) {
+      state.orderId = action.payload;
+    },
+    setOrderData(state, action) {
+      state.orderData = action.payload;
     },
   },
 });
 
-// export const favoritesFetch = createAsyncThunk(
-//   "favorites/favoritesFetch",
-//   async ({ url, token }) => {
-//     try {
-//       const response = await fetch(url, {
-//         method: "GET",
-//         headers: {
-//           "Content-Type": "application/json",
-//           Authorization: `Bearer ${token}`,
-//         },
-//       });
-
-// return await response.json();
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   }
-// );
-
 const favoritesSlice = createSlice({
   name: "favorites",
-  initialState: { favorites: [] },
+  initialState: {
+    favorites: [],
+  },
   reducers: {
     addFavorites(state, action) {
       state.favorites = action.payload;
@@ -108,17 +131,6 @@ const favoritesSlice = createSlice({
       state.favorites = filterState;
     },
   },
-  // extraReducers: {
-  //   [favoritesFetch.pending]: (state) => {
-  //     console.log("panding");
-  //   },
-  //   [favoritesFetch.fulfilled]: (state, action) => {
-  //     state.favorites = action.payload;
-  //   },
-  //   [favoritesFetch.rejected]: (state) => {
-  //     console.log("rejected");
-  //   },
-  // },
 });
 
 export const categoriesFetch = createAsyncThunk(
@@ -182,12 +194,20 @@ const loginSlice = createSlice({
     error: null,
     account: null,
     token: null,
+    favoriteId: null,
   },
   reducers: {
     logoutUser(state) {
       state.status = null;
       state.account = null;
       state.token = null;
+      state.favoriteId = null;
+    },
+    updateUser(state, action) {
+      state.account = action.payload;
+    },
+    setFavoriteId(state, action) {
+      state.favoriteId = action.payload;
     },
   },
 
@@ -208,16 +228,16 @@ const loginSlice = createSlice({
   },
 });
 
-export const { logoutUser } = loginSlice.actions;
+export const { logoutUser, updateUser, setFavoriteId } = loginSlice.actions;
 export const loginReducer = loginSlice.reducer;
 
-export const { openModal, closeModal } = modalSlice.actions;
+export const { openModal, closeModal, openSetting } = modalSlice.actions;
 export const modalReducer = modalSlice.reducer;
 
 export const { togglPassword, hidePassword } = passwordSlice.actions;
 export const passwordReducer = passwordSlice.reducer;
 
-export const { setId } = itemSlice.actions;
+export const { setId, setOrderId, setOrderData } = itemSlice.actions;
 export const itemReducer = itemSlice.reducer;
 
 export const { addCategories } = categoriesSlice.actions;
@@ -229,6 +249,16 @@ export const settingReducer = settingSlice.reducer;
 export const { addFavorites, removeFavorites } = favoritesSlice.actions;
 export const favoritesReducer = favoritesSlice.reducer;
 
-export const { addToCart, removeFromCart, changeQuantity, countCart } =
-  cartSlice.actions;
+export const { showAddedModal, hideAddedModal } = addedModalSlice.actions;
+export const addedModalReducer = addedModalSlice.reducer;
+
+export const {
+  addToCart,
+  removeFromCart,
+  changeQuantity,
+  countCart,
+  resetCart,
+  setBuyNow,
+  countBuyNow,
+} = cartSlice.actions;
 export const cartReducer = cartSlice.reducer;

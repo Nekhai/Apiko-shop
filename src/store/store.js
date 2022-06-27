@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { loadState } from "../app/browserStorage";
 import {
   modalReducer,
   loginReducer,
@@ -8,6 +9,7 @@ import {
   settingReducer,
   favoritesReducer,
   cartReducer,
+  addedModalReducer,
 } from "./slices";
 
 export const store = configureStore({
@@ -20,5 +22,7 @@ export const store = configureStore({
     setting: settingReducer,
     favorites: favoritesReducer,
     cart: cartReducer,
+    addedModal: addedModalReducer,
   },
+  preloadedState: loadState(),
 });

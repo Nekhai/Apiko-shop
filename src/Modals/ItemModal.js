@@ -2,24 +2,19 @@ import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import "./ItemModal.scss";
 import { useSelector, useDispatch } from "react-redux";
-import { closeModal, countCart } from "../store/slices";
+import { closeModal, countCart, setId } from "../store/slices";
 import { SvgClose } from "../components/Image/svgClose";
 import { Image } from "../components/Image/Image";
 import { ButtonAddToCart } from "../components/buttons/ButtonAddToCart";
 import { ButtonAddToFavorites } from "../components/buttons/ButtonAddToFavorites";
 import { ButtonBuyNow } from "../components/buttons/ButtonBuyNow";
 import { Count } from "../components/buttons/Count";
-import { useFetch } from "../app/App";
 
 export const ItemModal = () => {
   const dispatch = useDispatch();
   const modal = useSelector((state) => state.modal.modal);
   const token = useSelector((state) => state.login.token);
-  const id = useSelector((state) => state.item.item);
-
-  // const url = `/api/products/${id}`;
-
-  // const { fetchData } = useFetch(url);
+  const id = useSelector((state) => state.item.id);
 
   const [itemData, setItemData] = useState(null);
   const [amount, setAmount] = useState(1);
@@ -29,15 +24,14 @@ export const ItemModal = () => {
     dispatch(closeModal());
     setAmount(1);
     setItemData(null);
+    dispatch(setId(null));
   };
 
   useEffect(() => {
-    let isMounted = true;
-
-    const fetchItem = async (itemId) => {
-      if (!itemId) return;
+    const fetchItem = async () => {
+      if (!id) return;
       try {
-        const response = await fetch(`/api/products/${itemId}`, {
+        const response = await fetch(`/api/products/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -49,11 +43,10 @@ export const ItemModal = () => {
       }
     };
 
-    if (isMounted)
-      //  setItemData(fetchData);
-      fetchItem(id);
+    fetchItem();
+
     return () => {
-      isMounted = false;
+      setItemData(null);
     };
   }, [token, id]);
 
@@ -104,7 +97,10 @@ export const ItemModal = () => {
                 title="add to cart"
                 id={itemData.id}
                 amount={amount}
+                setAmount={setAmount}
                 price={itemData.price}
+                name={itemData.title}
+                setItemData={setItemData}
               />
               <ButtonAddToFavorites
                 title="add to favorites"
@@ -130,7 +126,13 @@ export const ItemModal = () => {
                 className="buttons-orange-border"
               />
             </div>
-            <ButtonBuyNow title="buy now" />
+            <ButtonBuyNow
+              title="buy now"
+              id={itemData.id}
+              amount={amount}
+              price={itemData.price}
+              name={itemData.title}
+            />
           </div>
         </div>
       </div>,

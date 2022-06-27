@@ -1,6 +1,12 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { closeModal, hidePassword } from "../store/slices";
+import {
+  closeModal,
+  hidePassword,
+  setOrderId,
+  setOrderData,
+  setFavoriteId,
+} from "../store/slices";
 import { SvgClose } from "../components/Image/svgClose";
 
 export const CloseModalBtn = ({ className }) => {
@@ -9,6 +15,9 @@ export const CloseModalBtn = ({ className }) => {
   const clickHandler = () => {
     dispatch(closeModal());
     dispatch(hidePassword());
+    dispatch(setOrderId(null));
+    dispatch(setOrderData(null));
+    dispatch(setFavoriteId(null));
   };
 
   return (

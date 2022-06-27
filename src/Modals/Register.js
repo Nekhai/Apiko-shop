@@ -7,16 +7,18 @@ import { OpenModalBtn } from "./OpenModalBtn";
 import { loginFetch, closeModal, hidePassword } from "../store/slices";
 import { useForm } from "react-hook-form";
 import { PasswordEye } from "./PasswordEye";
+import PhoneInput from "react-phone-number-input/react-hook-form-input";
 
 export const Register = () => {
   const passwordType = useSelector((state) => state.password.password);
   const modal = useSelector((state) => state.modal.modal);
+  const login = useSelector((state) => state.login);
+  const favotiteId = useSelector((state) => state.favorites.favoriteLoggedOut);
   const dispatch = useDispatch();
   const url = "/api/auth/register";
 
-  const login = useSelector((state) => state.login);
-
   const {
+    control,
     register,
     handleSubmit,
     formState: { errors },
@@ -42,7 +44,7 @@ export const Register = () => {
                   {...register("fullName", {
                     required: "Mandatory info missing",
                     pattern: {
-                      value: /^[A-Za-zа-яА-Я\s]+$/,
+                      value: /^[a-zA-Z\s]+$/,
                       message: "Cannot have special characters and numbers",
                     },
                   })}
@@ -82,8 +84,11 @@ export const Register = () => {
                 </p>
               </div>
               <div>
-                <input
-                  {...register("phone", {
+                <PhoneInput
+                  name="phone"
+                  control={control}
+                  placeholder="Phone number"
+                  rules={{
                     required: "Mandatory info missing",
                     pattern: {
                       value: /^(\+)?(\d){10,14}$/,
@@ -97,11 +102,7 @@ export const Register = () => {
                       value: 10,
                       message: "Min length 10",
                     },
-                  })}
-                  type="number"
-                  placeholder="Phone number"
-                  className={errors.phone && "form__valid-err"}
-                  id="number"
+                  }}
                 />
                 <label
                   htmlFor="number"
@@ -119,7 +120,7 @@ export const Register = () => {
                       value:
                         /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]/,
                       message:
-                        "The password has to be at least at least 1 letter, 1special symbol, 1 number",
+                        "The password has to be at least at least 1 letter, 1 special symbol, 1 number",
                     },
                     maxLength: {
                       value: 35,

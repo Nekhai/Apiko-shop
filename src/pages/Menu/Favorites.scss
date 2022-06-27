@@ -1,0 +1,12 @@
+.favorites {
+  &__items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 8px;
+    margin: 54px 0 52px 0;
+  }
+  &__more {
+    margin: 52px auto 83px;
+    width: 150px;
+  }
+}

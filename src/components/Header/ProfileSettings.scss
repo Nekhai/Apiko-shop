@@ -4,13 +4,14 @@
   position: absolute;
   opacity: 0;
   transition: 0.5s;
-  right: 161px;
+  right: 0;
   top: -234px;
   min-width: 234px;
   animation: opacity 0.5s ease-in-out;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
   border-radius: 4px;
   background: #ffffff;
+  z-index: 10;
   &__active {
     top: 76px;
     opacity: 1;
@@ -38,10 +39,17 @@
   &__settings-link {
     display: block;
     color: $text-dark;
+    background: none;
   }
   &__logout {
     padding: 14px 0 0 0;
     background: none;
     color: $text-red;
+  }
+
+  &__wrap {
+    width: 100%;
+    height: 100vh;
+    background: #0000003d;
   }
 }

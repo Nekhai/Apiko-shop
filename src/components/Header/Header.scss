@@ -1,12 +1,56 @@
 @import "../../styles/variables.scss";
 
 .header {
-  position: relative;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 160px;
-  width: 100%;
+  justify-content: center;
   height: 76px;
+  width: 100%;
   background: #110f21;
+  transition: 0.2s;
+  &__wrap {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    min-width: 860px;
+    margin: 0 160px;
+  }
+  &__content {
+    display: flex;
+  }
+  &__links {
+    display: flex;
+    align-items: center;
+  }
+  &__basket {
+    position: relative;
+    margin: 0 0 0 25px;
+  }
+  &__favourites {
+    background: none;
+    height: 18px;
+  }
+  & svg {
+    &:hover path {
+      transition: 0.2s;
+      fill: #e0e0e0;
+    }
+  }
+  &__total {
+    position: absolute;
+    top: -7px;
+    left: 11px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #fd7114;
+    border: 1px solid #110f21;
+    font-weight: 500;
+    font-size: 9px;
+    line-height: 13px;
+    letter-spacing: 0.4px;
+    text-align: center;
+    color: #110f21;
+  }
 }

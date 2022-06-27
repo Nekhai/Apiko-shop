@@ -1,0 +1,90 @@
+@import "../../styles/variables.scss";
+
+.main-form {
+  &__submit-btn {
+    display: block;
+    width: 100%;
+    height: 36px;
+    margin: 40px 0 0 0;
+    background: $orange-button;
+    border-radius: 4px;
+    transition: 0.4s;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 0.4px;
+    color: #ffffff;
+    &:hover {
+      opacity: 0.8;
+      transition: 0.4s;
+    }
+  }
+  &__valid-err {
+    border: 1px solid $text-red;
+  }
+  &__message-err {
+    margin: 5px 0 15px 33px;
+    width: 100%;
+    font-size: 12px;
+    line-height: 25px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.4px;
+    color: $text-red;
+  }
+  &__label-err {
+    color: $text-red;
+  }
+  &__message {
+    color: $text-light;
+    height: 40px;
+  }
+  &__city {
+    margin: 25px 0;
+  }
+  & label {
+    display: none;
+    position: absolute;
+    top: -6px;
+    left: 10px;
+    padding: 0 4px;
+    width: max-content;
+    background: #ffffff;
+    font-family: "Roboto", sans-serif;
+    font-size: 12px;
+    line-height: 12px;
+    letter-spacing: 0.15px;
+    color: #7070708a;
+  }
+  & input {
+    display: block;
+    width: 100%;
+    height: 40px;
+    padding: 0 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: 0.15px;
+    color: $text-dark;
+    &::placeholder {
+      color: $text-light;
+      font-family: "Heebo", sans-serif;
+    }
+    &:focus {
+      border: 2px solid $text-light;
+      &::placeholder {
+        opacity: 0;
+      }
+    }
+    &:not(:placeholder-shown) + label,
+    &:focus + label {
+      display: block;
+    }
+  }
+}
+
+form > div {
+  position: relative;
+}

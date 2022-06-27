@@ -1,7 +1,16 @@
 import React, { useState, useEffect } from "react";
 import "../../styles/buttons.scss";
 import { useSelector, useDispatch } from "react-redux";
-import { removeFavorites } from "../../store/slices";
+import { removeFavorites, openModal, setFavoriteId } from "../../store/slices";
+
+// export async function addFavoriteFetch(id, token) {
+//   await fetch(`/api/products/${id}/favorite`, {
+//     method: "POST",
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//     },
+//   });
+// }
 
 export const ButtonAddToFavorites = ({
   title,
@@ -14,39 +23,52 @@ export const ButtonAddToFavorites = ({
   const token = useSelector((state) => state.login.token);
   const [isLike, setIsLike] = useState(favorite);
 
-  const handleLike = async (likeId) => {
+  const handleLike = async () => {
+    if (!token) {
+      dispatch(openModal("continue"));
+      dispatch(setFavoriteId(id));
+      return;
+    }
     if (!isLike) {
-      await fetch(`/api/products/${likeId}/favorite`, {
+      // await addFavoriteFetch(id, token);
+      await fetch(`/api/products/${id}/favorite`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
     } else {
-      await fetch(`/api/products/${likeId}/favorite`, {
+      await fetch(`/api/products/${id}/favorite`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      dispatch(removeFavorites(likeId));
+      dispatch(removeFavorites(id));
     }
     setIsLike(!isLike);
   };
 
   useEffect(() => {
-    let isMounted = true;
+    // let isMounted = true;
+    // if (isMounted) setIsLike(favorite);
+    // return () => {
+    //   isMounted = false;
+    // };
 
-    if (isMounted) setIsLike(favorite);
-    return () => {
-      isMounted = false;
-    };
-  }, [favorite]);
+    setIsLike(favorite);
+
+    if (!token) {
+      setIsLike(false);
+    }
+
+    return () => setIsLike();
+  }, [favorite, token]);
 
   return (
     <button
       className={isLike ? `${className} ${className}-active` : className}
-      onClick={() => handleLike(id)}
+      onClick={handleLike}
     >
       {isLike ? newTitle : title}
     </button>

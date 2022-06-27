@@ -1,20 +1,25 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { CloseModalBtn } from "./CloseModalBtn";
 import { OpenModalBtn } from "./OpenModalBtn";
-import { loginFetch, closeModal, hidePassword } from "../store/slices";
+import {
+  loginFetch,
+  closeModal,
+  hidePassword,
+  setFavLoggedOut,
+} from "../store/slices";
 import { PasswordEye } from "./PasswordEye";
 import { useForm } from "react-hook-form";
 
 export const Login = () => {
   const passwordType = useSelector((state) => state.password.password);
   const modal = useSelector((state) => state.modal.modal);
+  const login = useSelector((state) => state.login);
+  // const likedId = useSelector((state) => state.favorites.favoriteLoggedOut);
+
   const dispatch = useDispatch();
   const url = "/api/auth/login";
-
-  const login = useSelector((state) => state.login);
 
   const {
     register,
@@ -23,9 +28,11 @@ export const Login = () => {
   } = useForm();
 
   const onSubmit = (data) => {
+    // console.log("login", likedId);
     dispatch(loginFetch({ data, url }));
     dispatch(closeModal());
     dispatch(hidePassword());
+    // dispatch(setFavLoggedOut(null));
   };
 
   return (

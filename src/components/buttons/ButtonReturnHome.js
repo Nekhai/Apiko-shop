@@ -2,7 +2,7 @@ import React from "react";
 import "../../styles/buttons.scss";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { closeModal } from "../../store/slices";
+import { closeModal, setFavoriteId, setBuyNow } from "../../store/slices";
 
 export const ButtonReturnHome = ({ title, orange = false }) => {
   const navigate = useNavigate();
@@ -11,6 +11,8 @@ export const ButtonReturnHome = ({ title, orange = false }) => {
   const handleClick = () => {
     navigate("/");
     dispatch(closeModal());
+    dispatch(setBuyNow([]));
+    dispatch(setFavoriteId(null));
   };
   return (
     <button
